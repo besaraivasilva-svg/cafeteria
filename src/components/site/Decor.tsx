@@ -1,3 +1,4 @@
+import { useId, type ReactNode } from "react";
 import bean from "@/assets/coffee-bean.webp";
 import { cn } from "@/lib/utils";
 
@@ -48,5 +49,32 @@ export function CurlyArrow({ className }: { className?: string }) {
       <path d="M4 40 C 30 10, 60 60, 92 26" strokeWidth="2.2" strokeLinecap="round" />
       <path d="M80 22 L 94 24 L 90 38" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+export function RotatingBadge({
+  text,
+  className,
+  children,
+}: {
+  text: string;
+  className?: string;
+  children?: ReactNode;
+}) {
+  const id = `badge-${useId().replace(/:/g, "")}`;
+  return (
+    <div className={cn("relative grid place-items-center", className)}>
+      <svg viewBox="0 0 200 200" className="animate-spin-slow absolute inset-0 size-full" aria-hidden>
+        <defs>
+          <path id={id} d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+        </defs>
+        <text className="fill-current font-display text-[17px] uppercase">
+          <textPath href={`#${id}`} textLength={486} lengthAdjust="spacing">
+            {text}
+          </textPath>
+        </text>
+      </svg>
+      <div className="relative">{children}</div>
+    </div>
   );
 }

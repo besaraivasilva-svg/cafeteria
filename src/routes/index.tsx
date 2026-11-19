@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/site/Hero";
 import { Marquee } from "@/components/site/Marquee";
 import { Signature } from "@/components/site/Signature";
+import { Ritual } from "@/components/site/Ritual";
 import { MenuSection } from "@/components/site/MenuSection";
 import { Closing } from "@/components/site/Closing";
 import { useReveal } from "@/hooks/use-reveal";
@@ -32,6 +33,7 @@ function Index() {
     <main className="overflow-x-hidden">
       <Hero />
       <Marquee />
+      <Ritual />
       <Signature />
       <MenuSection />
       <Closing />

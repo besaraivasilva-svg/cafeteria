@@ -31,6 +31,6 @@ use the editor.
 
 <!-- AGENT-MEMORY:BEGIN -->
 - Single-page menu: sections live in `src/components/site/*` and are composed in `src/routes/index.tsx`; in-page anchors are intentional for one scrolling menu.
-- Menu items/prices live only in `src/lib/menu.ts`; always render prices via `formatPrice` so currency formatting stays consistent.
+- Menu items/prices live only in `src/lib/menu.ts`; always render prices via `formatPrice` so currency formatting stays consistent. Category photos are mapped by category id inside `MenuSection.tsx` (tabbed, one category shown at a time) — add an image there when adding a category.
 - Visual tokens (colors, hard "stamp" shadows, animations) live in `src/styles.css`; button styles are `cva` variants in `src/components/ui/button.tsx` (honey, espresso, pill).
 <!-- AGENT-MEMORY:END -->
