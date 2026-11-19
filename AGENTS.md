@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+<!-- AGENT-MEMORY:BEGIN -->
+- Single-page menu: sections live in `src/components/site/*` and are composed in `src/routes/index.tsx`; in-page anchors are intentional for one scrolling menu.
+- Menu items/prices live only in `src/lib/menu.ts`; always render prices via `formatPrice` so currency formatting stays consistent.
+- Visual tokens (colors, hard "stamp" shadows, animations) live in `src/styles.css`; button styles are `cva` variants in `src/components/ui/button.tsx` (honey, espresso, pill).
+<!-- AGENT-MEMORY:END -->

@@ -1,23 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/site/Hero";
+import { Marquee } from "@/components/site/Marquee";
+import { Signature } from "@/components/site/Signature";
+import { MenuSection } from "@/components/site/MenuSection";
+import { Closing } from "@/components/site/Closing";
+import { useReveal } from "@/hooks/use-reveal";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Bruma Café — Cardápio digital" },
+      {
+        name: "description",
+        content: "Cafés especiais, matcha, cold brew e assados do dia. Veja o cardápio completo da Bruma Café com preços.",
+      },
+      { property: "og:title", content: "Bruma Café — Cardápio digital" },
+      {
+        property: "og:description",
+        content: "Cafés especiais, matcha, cold brew e assados do dia. Veja o cardápio completo com preços.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useReveal();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="overflow-x-hidden">
+      <Hero />
+      <Marquee />
+      <Signature />
+      <MenuSection />
+      <Closing />
+    </main>
   );
 }
