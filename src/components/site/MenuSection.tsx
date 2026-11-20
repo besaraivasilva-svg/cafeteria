@@ -131,36 +131,67 @@ export function MenuSection() {
                 </div>
                 <div className="relative w-24 sm:w-52">
                   <Starburst className="animate-spin-slow absolute -right-3 -top-3 size-10 text-honey sm:-right-5 sm:-top-5 sm:size-16" points={14} />
-                  <div className="animate-focus-in rotate-3 overflow-hidden rounded-2xl border-[2.5px] border-espresso bg-honey-soft shadow-stamp transition-[rotate] duration-500 ease-brand hover:rotate-0 sm:rounded-[1.75rem]">
+                  <div className="animate-focus-in rotate-3 overflow-hidden rounded-media border border-espresso/15 bg-honey-soft shadow-lift transition-[rotate] duration-500 ease-brand hover:rotate-0 sm:rounded-card">
                     <FadeImage src={images[cat.id]} alt={cat.title} className="aspect-square w-full object-cover" />
                   </div>
                 </div>
               </div>
 
               <ul className="mt-10 grid gap-6 sm:grid-cols-2">
-                {cat.items.map((item, i) => (
-                  <li
-                    key={item.name}
-                    style={{ animationDelay: `${120 + i * 60}ms` }}
-                    className="animate-rise group overflow-hidden rounded-[1.5rem] border border-espresso/15 bg-background shadow-soft transition-[translate,box-shadow,border-color] duration-500 ease-brand hover:border-espresso/40 hover:shadow-lift motion-safe:hover:-translate-y-1.5"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden bg-honey-soft">
-                      <FadeImage src={productImages[item.name]} alt={item.name} width={640} height={640} className="h-full w-full object-cover duration-700 motion-safe:group-hover:scale-105" />
-                      {/* detail revealed on hover */}
-                      <span aria-hidden className="absolute bottom-3 left-3 translate-y-2 rounded-full bg-cream/95 px-3 py-1 font-display text-xs tracking-wide text-espresso opacity-0 shadow-stamp-sm transition-all duration-500 ease-brand group-hover:translate-y-0 group-hover:opacity-100">
-                        Nº {pad(i + 1)} · {cat.title}
-                      </span>
-                    </div>
-                    <div className="p-5">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <h4 className="font-display text-2xl leading-tight text-espresso">{item.name}</h4>
-                        <span className="h-0.5 w-6 shrink-0 rounded-full bg-honey transition-[width] duration-500 ease-brand group-hover:w-10" aria-hidden />
+                {cat.items.map((item, i) => {
+                  const n = cat.items.length;
+                  // the house pick leads the category; an odd leftover closes the grid in the same wide format
+                  const featured = i === 0;
+                  const wide = featured || (i === n - 1 && (n - 1) % 2 === 1);
+                  return (
+                    <li
+                      key={item.name}
+                      style={{ animationDelay: `${120 + i * 60}ms` }}
+                      className={cn(
+                        "animate-rise group overflow-hidden rounded-card border border-espresso/10 bg-background shadow-soft transition-[translate,box-shadow,border-color] duration-500 ease-brand hover:border-espresso/25 hover:shadow-lift motion-safe:hover:-translate-y-1.5",
+                        // on phones the rest of the list becomes compact rows, so the menu is quick to scan
+                        !featured && "grid grid-cols-[7rem_minmax(0,1fr)]",
+                        !wide && "sm:block",
+                        wide && "sm:col-span-2 sm:grid",
+                        featured ? "sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]" : wide && "sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]",
+                      )}
+                    >
+                      <div className={cn("relative overflow-hidden bg-honey-soft", featured ? "aspect-[4/3]" : "aspect-square sm:aspect-[4/3]", wide && "sm:aspect-auto", featured ? "sm:min-h-80" : wide && "sm:min-h-56")}>
+                        <FadeImage
+                          src={productImages[item.name]}
+                          alt={item.name}
+                          width={640}
+                          height={640}
+                          className={cn("h-full w-full object-cover duration-700 motion-safe:group-hover:scale-105", wide && "sm:absolute sm:inset-0")}
+                        />
+                        {/* detail revealed on hover */}
+                        <span aria-hidden className="absolute bottom-3 left-3 translate-y-2 max-sm:hidden rounded-full bg-cream/95 px-3 py-1 font-display text-xs tracking-wide text-espresso opacity-0 shadow-soft transition-all duration-500 ease-brand group-hover:translate-y-0 group-hover:opacity-100">
+                          Nº {pad(i + 1)} · {cat.title}
+                        </span>
                       </div>
-                      <p className="mt-2 min-h-10 text-sm text-muted-foreground">{item.description}</p>
-                      <p className="mt-4 font-display text-xl tabular-nums text-espresso">{formatPrice(item.price)}</p>
-                    </div>
-                  </li>
-                ))}
+                      <div className={cn("flex flex-col justify-center", featured ? "p-6" : "p-4 sm:p-6", wide && "sm:justify-center sm:p-8", featured && "lg:p-10")}>
+                        {featured && (
+                          <p className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-muted-foreground">
+                            <Starburst className="size-4 text-honey" points={10} /> Escolha da casa
+                          </p>
+                        )}
+                        <div className="flex items-baseline justify-between gap-4">
+                          <h4 className={cn("font-display leading-tight text-espresso", featured ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl")}>{item.name}</h4>
+                          {!featured && (
+                            <p className="shrink-0 font-display text-lg tabular-nums text-espresso sm:text-xl">{formatPrice(item.price)}</p>
+                          )}
+                        </div>
+                        <p className={cn("mt-2 text-muted-foreground", featured ? "max-w-xs text-base" : "text-sm")}>{item.description}</p>
+                        {featured && (
+                          <p className="mt-8 flex items-baseline gap-3 border-t border-espresso/15 pt-5">
+                            <span className="font-display text-3xl tabular-nums text-espresso">{formatPrice(item.price)}</span>
+                            <span className="font-serif text-lg italic text-muted-foreground">a xícara</span>
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
 
               <div className="mt-10 flex flex-wrap items-center justify-between gap-4">

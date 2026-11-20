@@ -35,4 +35,5 @@ use the editor.
 - `ScrollNavigation` uses section anchors and section position tracking for lightweight scrolling navigation across desktop and mobile.
 - Visual tokens (colors, hard "stamp" shadows, animations) live in `src/styles.css`; button styles are `cva` variants in `src/components/ui/button.tsx` (honey, espresso, pill).
 - Motion uses one language: the `--ease-brand` easing and keyframe utilities in `src/styles.css`; scroll entrances use `.reveal` / `.reveal-image` with the `--reveal-delay` variable (never inline transition-delay, it delays hover too); lazy photos use `FadeImage`. Why: consistent, purposeful animation across sections.
+- Elevation and shape system: hard "stamp" shadows only on small accents (buttons, stickers, badges); photos and cards use soft `shadow-soft` / `shadow-lift` with `rounded-card` outside and `rounded-media` inside. Each menu category leads with its first item as a wide featured card. Why: one cohesive, premium visual language.
 <!-- AGENT-MEMORY:END -->

@@ -17,16 +17,12 @@ export function Signature() {
     <section id="destaques" className="grain relative overflow-hidden py-24 sm:py-32">
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="reveal mx-auto max-w-2xl text-center">
-          <h2 className="relative font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.95] text-espresso">
-            Os que fazemos
-            <br />
-            um pouco{" "}
-            <span className="relative inline-block">
-              diferente
-              <span className="absolute -right-6 -top-7 rotate-12 rounded-full border-2 border-espresso bg-honey px-3 py-1 font-sans text-[10px] font-extrabold uppercase tracking-widest text-espresso shadow-stamp-sm sm:-right-10">
-                Assinatura
-              </span>
-            </span>
+          <p className="mb-6 inline-block -rotate-3 rounded-full border-2 border-espresso bg-honey px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.25em] text-espresso shadow-stamp-sm">
+            Assinaturas da casa
+          </p>
+          <h2 className="font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.95] text-espresso">
+            Os que fazemos <br className="hidden sm:block" />
+            um pouco diferente
           </h2>
           <p className="mx-auto mt-5 max-w-md text-muted-foreground">
             Três receitas que viraram a cara da Bruma. Peça uma vez, volte sempre.
@@ -38,11 +34,11 @@ export function Signature() {
             <div key={p.name} className="reveal" style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties}>
             <article
               className={cn(
-                "group relative rounded-[2rem] border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-[rotate,translate,box-shadow] duration-500 ease-brand hover:rotate-0 hover:-translate-y-2 hover:shadow-stamp-lg",
+                "group relative rounded-card border border-espresso/15 bg-cream p-3 shadow-soft transition-[rotate,translate,box-shadow] duration-500 ease-brand hover:rotate-0 hover:shadow-lift motion-safe:hover:-translate-y-2",
                 p.tilt,
               )}
             >
-              <div className="relative overflow-hidden rounded-[1.5rem]">
+              <div className="relative overflow-hidden rounded-media bg-honey-soft">
                 <img src={p.img} alt={p.name} loading="lazy" decoding="async" className="aspect-square w-full object-cover transition-transform duration-700 ease-brand group-hover:scale-105" />
                 <span className="absolute left-3 top-3 rounded-full bg-cream px-3 py-1 text-xs font-bold text-espresso">{p.tag}</span>
               </div>

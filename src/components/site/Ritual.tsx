@@ -41,7 +41,7 @@ export function Ritual() {
 
         <div className="mt-20 grid items-start gap-14 md:grid-cols-[1fr_1.15fr] md:gap-20">
           <div className="reveal relative mx-auto w-full max-w-xs sm:max-w-sm md:mx-0">
-            <div className="overflow-hidden rounded-t-full rounded-b-[2rem] border-[2.5px] border-espresso shadow-stamp">
+            <div className="overflow-hidden rounded-t-full rounded-b-card shadow-lift">
               <div className="reveal-image">
                 <img src={barista} alt="Barista servindo um cappuccino com latte art" loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover" />
               </div>
