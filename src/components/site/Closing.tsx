@@ -67,6 +67,16 @@ export function Closing() {
       </div>
 
       <footer className="relative z-10 bg-espresso text-cream">
+        <div className="mx-auto grid max-w-6xl gap-8 border-b border-cream/20 px-5 py-12 sm:grid-cols-3">
+          <div><p className="font-display text-3xl">Bruma Café</p><p className="mt-3 max-w-xs text-sm text-cream/80">Uma pausa boa. Uma xícara feita com calma. Seu próximo encontro é aqui.</p></div>
+          <nav aria-label="Navegação do rodapé" className="flex flex-col items-start gap-3">
+            <p className="font-display text-xl text-honey">Explore a Bruma</p>
+            <a className="hover:underline" href="#ritual">Nosso ritual</a>
+            <a className="hover:underline" href="#cardapio">Cardápio</a>
+            <a className="hover:underline" href="#destaques">Assinaturas</a>
+          </nav>
+          <div><p className="font-display text-xl text-honey">Fique mais um pouco</p><p className="mt-3 text-sm">São Paulo · Vila Madalena</p><p className="mt-2 text-sm text-cream/80">Todos os dias · 07h às 20h</p><a href="#inicio" className="mt-4 inline-flex items-center gap-2 text-sm hover:underline">Voltar ao início ↑</a></div>
+        </div>
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-6 text-sm sm:flex-row">
           <Logo className="text-cream [&_path]:stroke-espresso" />
           <p className="opacity-80">© {new Date().getFullYear()} Bruma Café · Feito com grãos e carinho</p>

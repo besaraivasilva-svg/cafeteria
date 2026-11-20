@@ -3,3 +3,5 @@
 - [x] Aplicar direção criativa: entrada com movimento, seção do ritual, cardápio interativo
 - [x] Nome confirmado: Bruma Café
 - [x] Itens e preços: criar próprios (R$)
+
+- [x] Aplicar arquitetura: catálogo com fotos, navegação contínua, jornada e rodapé

@@ -6,6 +6,7 @@ import { Ritual } from "@/components/site/Ritual";
 import { MenuSection } from "@/components/site/MenuSection";
 import { Closing } from "@/components/site/Closing";
 import { useReveal } from "@/hooks/use-reveal";
+import { ScrollNavigation } from "@/components/site/ScrollNavigation";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,12 +31,13 @@ export const Route = createFileRoute("/")({
 function Index() {
   useReveal();
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-clip">
       <Hero />
+      <ScrollNavigation />
       <Marquee />
       <Ritual />
-      <Signature />
       <MenuSection />
+      <Signature />
       <Closing />
     </main>
   );

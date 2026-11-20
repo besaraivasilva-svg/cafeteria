@@ -11,6 +11,8 @@ import graos from "@/assets/cat-graos.webp";
 import { formatPrice, menu } from "@/lib/menu";
 import { cn } from "@/lib/utils";
 import { Starburst } from "./Decor";
+import { Button } from "@/components/ui/button";
+import { productImages } from "@/lib/product-images";
 
 const images: Record<string, string> = {
   classicos,
@@ -26,13 +28,14 @@ const images: Record<string, string> = {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export function MenuSection() {
-  const [active, setActive] = useState(menu[0]!.id);
+  const [active, setActive] = useState(menu[0]?.id ?? "");
   const index = Math.max(0, menu.findIndex((c) => c.id === active));
-  const cat = menu[index]!;
+  const cat = menu[index];
   const next = menu[index + 1];
+  if (!cat) return null;
 
   return (
-    <section id="cardapio" className="relative scroll-mt-4 bg-cream py-24 sm:py-32">
+    <section id="cardapio" className="relative scroll-mt-24 bg-cream py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="reveal flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -50,14 +53,16 @@ export function MenuSection() {
             {menu.map((c, i) => {
               const on = c.id === active;
               return (
-                <button
+                <Button
+                  variant="ghost"
+                  id={`tab-${c.id}`}
                   key={c.id}
                   role="tab"
                   aria-selected={on}
                   aria-controls="menu-panel"
                   onClick={() => setActive(c.id)}
                   className={cn(
-                    "group flex shrink-0 items-baseline gap-3 rounded-full border-2 px-4 py-2 text-left transition-all duration-300 lg:w-full lg:rounded-none lg:border-0 lg:border-b-[1.5px] lg:border-espresso/20 lg:px-0 lg:py-3.5",
+                    "group flex h-auto shrink-0 justify-start items-baseline gap-3 rounded-full border-2 px-4 py-2 text-left transition-all duration-300 lg:w-full lg:rounded-none lg:border-0 lg:border-b-[1.5px] lg:border-espresso/20 lg:px-0 lg:py-3.5",
                     on ? "border-espresso bg-honey lg:bg-transparent" : "border-espresso/25 hover:border-espresso",
                   )}
                 >
@@ -73,20 +78,20 @@ export function MenuSection() {
                     {c.title}
                   </span>
                   {on && <ArrowUpRight className="ml-auto hidden size-5 self-center text-honey lg:block" />}
-                </button>
+                </Button>
               );
             })}
           </div>
 
           {/* panel */}
-          <div id="menu-panel" role="tabpanel" aria-live="polite" className="relative">
+          <div id="menu-panel" role="tabpanel" aria-labelledby={`tab-${cat.id}`} aria-live="polite" className="relative min-w-0">
             <div key={cat.id} className="animate-rise">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-5 sm:items-end sm:gap-8">
                 <div className="min-w-0">
                   <p className="font-display text-sm tracking-widest text-muted-foreground">
                     {pad(index + 1)} <span className="opacity-50">/ {pad(menu.length)}</span>
                   </p>
-                  <h3 className="mt-2 font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[0.95] text-espresso">{cat.title}</h3>
+                  <h3 className="mt-2 break-words font-display text-3xl leading-tight text-espresso sm:text-5xl">{cat.title}</h3>
                   <p className="mt-3 font-serif text-2xl italic text-muted-foreground">{cat.tagline}</p>
                   <p className="mt-4 inline-flex items-center gap-2 rounded-full border-[1.5px] border-espresso px-3 py-1 text-xs font-bold uppercase tracking-widest text-espresso">
                     <Clock className="size-3.5" /> {cat.hours}
@@ -100,19 +105,21 @@ export function MenuSection() {
                 </div>
               </div>
 
-              <ul className="mt-10 grid gap-x-10 sm:grid-cols-2">
+              <ul className="mt-10 grid gap-6 sm:grid-cols-2">
                 {cat.items.map((item, i) => (
                   <li
                     key={item.name}
                     style={{ animationDelay: `${120 + i * 60}ms` }}
-                    className="animate-rise group border-b-[1.5px] border-espresso/15 py-4"
+                    className="animate-rise group overflow-hidden rounded-lg border border-espresso/15 bg-background shadow-soft"
                   >
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-bold text-espresso transition-transform duration-300 group-hover:translate-x-1">{item.name}</span>
-                      <span className="leader" aria-hidden />
-                      <span className="shrink-0 font-display tabular-nums text-espresso">{formatPrice(item.price)}</span>
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img src={productImages[item.name]} alt={item.name} width={640} height={640} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 motion-safe:group-hover:scale-105" />
                     </div>
-                    <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
+                    <div className="p-5">
+                      <h4 className="font-display text-2xl leading-tight text-espresso">{item.name}</h4>
+                      <p className="mt-2 min-h-10 text-sm text-muted-foreground">{item.description}</p>
+                      <p className="mt-4 font-display text-xl tabular-nums text-espresso">{formatPrice(item.price)}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -120,13 +127,13 @@ export function MenuSection() {
               <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-xs text-muted-foreground">Preços em reais. Consulte opções sem lactose e sem glúten.</p>
                 {next && (
-                  <button
+                  <Button variant="link"
                     onClick={() => setActive(next.id)}
-                    className="group inline-flex items-center gap-2 font-display text-lg text-espresso"
+                    className="group h-auto whitespace-normal p-0 text-left font-display text-lg text-espresso"
                   >
                     Próximo: {next.title}
                     <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
