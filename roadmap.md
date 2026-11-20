@@ -5,3 +5,4 @@
 - [x] Itens e preços: criar próprios (R$)
 
 - [x] Aplicar arquitetura: catálogo com fotos, navegação contínua, jornada e rodapé
+- [x] Aplicar filosofia de UX: entrada em sequência, rolagem, hovers, microinterações, mobile, acessibilidade e desempenho

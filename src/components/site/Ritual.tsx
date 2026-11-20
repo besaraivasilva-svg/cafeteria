@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import barista from "@/assets/ritual-barista.webp";
 import bean from "@/assets/coffee-bean.webp";
 import cappuccino from "@/assets/sig-cappuccino.webp";
@@ -41,7 +42,9 @@ export function Ritual() {
         <div className="mt-20 grid items-start gap-14 md:grid-cols-[1fr_1.15fr] md:gap-20">
           <div className="reveal relative mx-auto w-full max-w-xs sm:max-w-sm md:mx-0">
             <div className="overflow-hidden rounded-t-full rounded-b-[2rem] border-[2.5px] border-espresso shadow-stamp">
-              <img src={barista} alt="Barista servindo um cappuccino com latte art" loading="lazy" className="aspect-[3/4] w-full object-cover transition-transform duration-[1.5s] hover:scale-105" />
+              <div className="reveal-image">
+                <img src={barista} alt="Barista servindo um cappuccino com latte art" loading="lazy" decoding="async" className="aspect-[3/4] w-full object-cover" />
+              </div>
             </div>
             <RotatingBadge
               text="bruma café • desde 2019 • são paulo • "
@@ -55,7 +58,7 @@ export function Ritual() {
             {steps.map((s, i) => (
               <li
                 key={s.n}
-                style={{ transitionDelay: `${i * 120}ms` }}
+                style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties}
                 className="reveal group grid grid-cols-[auto_minmax(0,1fr)] gap-6 border-t-[1.5px] border-espresso/25 py-8 last:border-b-[1.5px]"
               >
                 <span className="text-outline font-display text-5xl leading-none transition-colors duration-500 group-hover:text-honey sm:text-6xl">

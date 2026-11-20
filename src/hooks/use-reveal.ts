@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-/** Adds `is-visible` to every `.reveal` element as it scrolls into view. */
+/** Adds `is-visible` to every `.reveal` / `.reveal-image` element as it scrolls into view. Stagger with the `--reveal-delay` CSS variable. */
 export function useReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal, .reveal-image"));
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {

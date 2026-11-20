@@ -34,4 +34,5 @@ use the editor.
 - Menu items/prices live only in `src/lib/menu.ts`; render prices via `formatPrice`. Product photos are mapped by product name in `src/lib/product-images.ts`; add the matching photo when adding a product. The menu shows one category at a time.
 - `ScrollNavigation` uses section anchors and section position tracking for lightweight scrolling navigation across desktop and mobile.
 - Visual tokens (colors, hard "stamp" shadows, animations) live in `src/styles.css`; button styles are `cva` variants in `src/components/ui/button.tsx` (honey, espresso, pill).
+- Motion uses one language: the `--ease-brand` easing and keyframe utilities in `src/styles.css`; scroll entrances use `.reveal` / `.reveal-image` with the `--reveal-delay` variable (never inline transition-delay, it delays hover too); lazy photos use `FadeImage`. Why: consistent, purposeful animation across sections.
 <!-- AGENT-MEMORY:END -->

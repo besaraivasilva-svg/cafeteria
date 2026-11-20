@@ -32,7 +32,7 @@ export function Hero() {
 
   let w = 0;
   const word = (t: string) => {
-    const delay = 80 + w++ * 70;
+    const delay = 520 + w++ * 65; // typography starts once the drink is on stage
     const isKey = t === "momentos";
     return (
       <span key={t + delay} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
@@ -55,7 +55,7 @@ export function Hero() {
   return (
     <section id="inicio" ref={ref} onPointerMove={onMove} className="relative overflow-hidden">
       {/* ribbon */}
-      <div className="bg-espresso text-cream">
+      <div className="animate-drop bg-espresso text-cream">
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 overflow-hidden whitespace-nowrap px-4 py-2 text-[11px] font-semibold tracking-wide sm:gap-6 sm:text-xs">
           <span className="flex items-center gap-1.5"><Coffee className="size-3.5" /> Sua cafeteria de todo dia</span>
           <span className="hidden items-center gap-1.5 sm:flex"><Clock className="size-3.5" /> Aberto todos os dias, 07h — 20h</span>
@@ -64,7 +64,7 @@ export function Hero() {
       </div>
 
       {/* header */}
-      <header className="relative z-20 mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-5 md:grid-cols-[1fr_auto_1fr]">
+      <header className="animate-drop relative z-20 mx-auto [animation-delay:120ms] grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-5 md:grid-cols-[1fr_auto_1fr]">
         <Logo />
         <nav className="hidden items-center gap-2 md:flex">
           {nav.map((n) => (
@@ -83,16 +83,19 @@ export function Hero() {
       </header>
 
       {/* vertical side marks */}
-      <p className="absolute left-5 top-1/2 hidden -translate-y-1/2 -rotate-90 origin-left text-[11px] font-bold uppercase tracking-[0.35em] text-muted-foreground lg:block">
+      <p className="animate-veil absolute left-5 top-1/2 hidden [animation-delay:1500ms] -translate-y-1/2 -rotate-90 origin-left text-[11px] font-bold uppercase tracking-[0.35em] text-muted-foreground lg:block">
         Est. 2019 — São Paulo
       </p>
-      <p className="absolute right-5 top-1/2 hidden translate-x-1/2 -translate-y-1/2 rotate-90 text-[11px] font-bold uppercase tracking-[0.35em] text-muted-foreground lg:block">
+      <p className="animate-veil absolute right-5 top-1/2 hidden [animation-delay:1500ms] translate-x-1/2 -translate-y-1/2 rotate-90 text-[11px] font-bold uppercase tracking-[0.35em] text-muted-foreground lg:block">
         Torra fresca · toda semana
       </p>
 
       {/* hero body */}
       <div className="relative mx-auto max-w-6xl px-5 pt-6 text-center md:pt-10">
-        <div className="bg-glow animate-breathe pointer-events-none absolute left-1/2 top-40 h-[520px] w-[720px] -translate-x-1/2" />
+        {/* 1 · atmosphere */}
+        <div className="animate-veil pointer-events-none absolute inset-0">
+          <div className="bg-glow animate-breathe absolute left-1/2 top-40 h-[520px] w-[720px] -translate-x-1/2" />
+        </div>
 
         <h1 className="relative font-display text-[clamp(2.75rem,8vw,6.25rem)] leading-[0.95] tracking-tight text-espresso">
           <span className="sr-only">Café feito para seus momentos de todo dia</span>
@@ -107,11 +110,11 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="animate-rise mx-auto mt-6 max-w-md text-base text-muted-foreground [animation-delay:650ms] sm:text-lg">
+        <p className="animate-rise mx-auto mt-6 max-w-md text-base text-muted-foreground [animation-delay:1100ms] sm:text-lg">
           Grãos torrados toda semana, leite vaporizado com carinho e um cantinho para você ficar.
         </p>
 
-        <div className="animate-rise mt-8 flex justify-center [animation-delay:780ms]">
+        <div className="animate-rise mt-8 flex justify-center [animation-delay:1220ms]">
           <Button variant="honey" size="xl" asChild>
             <a href="#cardapio">
               Ver o cardápio <ArrowDownRight className="size-5!" />
@@ -120,11 +123,11 @@ export function Hero() {
         </div>
 
         {/* floating beans (parallax layers) */}
-        <div style={depth(-18)} className="pointer-events-none absolute inset-0">
+        <div style={depth(-18)} className="animate-veil pointer-events-none absolute inset-0 [animation-delay:1600ms]">
           <Bean className="animate-float left-[4%] top-[46%] w-14 sm:w-20" rotate={-30} />
           <Bean className="animate-float right-[6%] top-[62%] w-10 sm:hidden" rotate={35} />
         </div>
-        <div style={depth(10)} className="pointer-events-none absolute inset-0">
+        <div style={depth(10)} className="animate-veil pointer-events-none absolute inset-0 [animation-delay:1700ms]">
           <Bean className="animate-float-slow left-[22%] top-[2%] hidden w-8 opacity-90 sm:block" rotate={40} />
           <Bean className="animate-float-slow right-[20%] top-[6%] hidden w-9 sm:block" rotate={-60} />
           <Bean className="animate-float right-[3%] top-[0%] hidden w-7 md:block" rotate={20} />
@@ -138,28 +141,29 @@ export function Hero() {
               alt="Iced latte com gelo e leite cremoso"
               width={493}
               height={1100}
-              className="animate-rise absolute bottom-0 left-1/2 w-[170px] -translate-x-1/2 translate-y-[38%] drop-shadow-2xl [animation-delay:500ms] sm:w-[230px]"
+              fetchPriority="high"
+              className="animate-focus-in absolute bottom-0 left-1/2 w-[170px] -translate-x-1/2 translate-y-[38%] drop-shadow-2xl [animation-delay:250ms] sm:w-[230px]"
             />
           </div>
 
           {/* handwritten note */}
-          <div className="animate-rise absolute bottom-24 left-0 hidden -rotate-6 text-left [animation-delay:900ms] md:block">
+          <div className="animate-rise absolute bottom-24 left-0 hidden -rotate-6 text-left [animation-delay:1350ms] md:block">
             <p className="font-serif text-3xl italic text-espresso">torra da casa,</p>
             <p className="font-serif text-3xl italic text-muted-foreground">desde 2019</p>
             <CurlyArrow className="ml-24 mt-1 w-28 text-espresso" />
           </div>
 
           {/* rotating seal */}
-          <div style={depth(14)} className="absolute -bottom-2 left-[19%] hidden lg:block">
+          <div style={depth(14)} className="animate-veil absolute -bottom-2 left-[19%] hidden [animation-delay:1500ms] lg:block">
             <RotatingBadge text="feito à mão • com calma • com amor • " className="size-28 text-espresso">
               <Starburst className="size-9 text-honey" points={10} />
             </RotatingBadge>
           </div>
 
           {/* sticker card */}
-          <div style={depth(12)} className="animate-rise absolute right-0 top-4 hidden [animation-delay:1000ms] sm:block">
+          <div style={depth(12)} className="animate-rise absolute right-0 top-4 hidden [animation-delay:1450ms] sm:block">
             <CurlyArrow className="absolute -left-28 top-16 w-24 -scale-y-100 text-espresso" />
-            <div className="relative rotate-6 rounded-3xl border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-transform duration-500 hover:rotate-0">
+            <div className="relative rotate-6 rounded-3xl border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-[rotate,box-shadow] duration-500 ease-brand hover:rotate-0 hover:shadow-stamp-lg">
               <div className="relative grid size-36 place-items-center">
                 <Starburst className="animate-spin-slow absolute inset-0 text-honey" points={16} />
                 <img src={coldBrew} alt="Cold brew com casca de laranja" className="relative size-24 rounded-full object-cover" />

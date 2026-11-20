@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors duration-300 ease-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-espresso focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -17,10 +17,10 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         honey:
-          "rounded-full bg-honey font-display tracking-wide text-espresso shadow-stamp-sm transition-all hover:-translate-y-0.5 hover:shadow-stamp active:translate-y-0.5 active:shadow-none",
+          "rounded-full bg-honey font-display tracking-wide text-espresso shadow-stamp-sm transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:shadow-stamp active:translate-y-0.5 active:shadow-none",
         espresso:
-          "rounded-full bg-espresso font-display tracking-wide text-cream shadow-soft transition-all hover:-translate-y-0.5 hover:bg-espresso/90",
-        pill: "rounded-full border-[1.5px] border-espresso bg-transparent font-semibold text-espresso transition-all hover:-rotate-2 hover:bg-honey",
+          "rounded-full bg-espresso font-display tracking-wide text-cream shadow-soft transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:bg-espresso/90",
+        pill: "rounded-full border-[1.5px] border-espresso bg-transparent font-semibold text-espresso transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:bg-honey active:translate-y-0",
       },
       size: {
         default: "h-9 px-4 py-2",

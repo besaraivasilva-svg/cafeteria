@@ -54,6 +54,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* one motion language for the whole site */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
   --animate-marquee: marquee 28s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float 9s ease-in-out infinite;
@@ -61,6 +63,7 @@
 }
 
 :root {
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
   --radius: 1.25rem;
   /* Bruma palette: cream paper, roasted brown, honey caramel */
   --background: oklch(0.982 0.026 92);
@@ -89,6 +92,8 @@
 
   --shadow-stamp: 5px 6px 0 0 var(--espresso);
   --shadow-stamp-sm: 3px 4px 0 0 var(--espresso);
+  --shadow-stamp-lg: 8px 10px 0 0 var(--espresso);
+  --shadow-lift: 0 22px 40px -18px color-mix(in oklab, var(--espresso) 45%, transparent);
   --shadow-soft: 0 30px 60px -30px color-mix(in oklab, var(--espresso) 45%, transparent);
   --gradient-sunset: linear-gradient(180deg, var(--background) 0%, var(--background) 35%, var(--honey-soft) 100%);
   --gradient-glow: radial-gradient(closest-side, color-mix(in oklab, var(--honey) 55%, transparent), transparent);
@@ -124,6 +129,10 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  a:focus-visible, [role="tab"]:focus-visible {
+    outline: 2px solid var(--espresso);
+    outline-offset: 3px;
+  }
   ::selection {
     background: var(--honey);
     color: var(--espresso);
@@ -150,6 +159,18 @@
   0%, 100% { opacity: 0.75; scale: 1; }
   50% { opacity: 1; scale: 1.08; }
 }
+@keyframes veil {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes drop {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes focus-in {
+  from { opacity: 0; filter: blur(14px); scale: 0.92; }
+  to { opacity: 1; filter: blur(0); scale: 1; }
+}
 @keyframes rise {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
@@ -157,6 +178,12 @@
 
 @utility shadow-stamp {
   box-shadow: var(--shadow-stamp);
+}
+@utility shadow-stamp-lg {
+  box-shadow: var(--shadow-stamp-lg);
+}
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
 }
 @utility shadow-stamp-sm {
   box-shadow: var(--shadow-stamp-sm);
@@ -196,26 +223,69 @@
 @utility reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: opacity 0.8s var(--ease-brand), transform 0.8s var(--ease-brand);
+  transition-delay: var(--reveal-delay, 0ms);
   &.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
 }
+/* image reveal: the photo uncovers from the bottom as it enters the screen */
+@utility reveal-image {
+  clip-path: inset(18% 0 0 0 round 2rem);
+  & img { scale: 1.12; transition: scale 1.4s var(--ease-brand); }
+  transition: clip-path 1.1s var(--ease-brand);
+  transition-delay: var(--reveal-delay, 0ms);
+  &.is-visible { clip-path: inset(0 0 0 0 round 2rem); }
+  &.is-visible img { scale: 1; }
+}
+/* refined underline that grows from the left on hover / active */
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.3rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-brand);
+  }
+  &:hover::after, &[aria-current]::after { transform: scaleX(1); }
+}
+/* images fade in once loaded, over a warm placeholder */
+@utility img-fade {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-brand), scale 0.7s var(--ease-brand);
+  &[data-loaded="true"] { opacity: 1; }
+}
 @utility animate-word {
-  animation: word 0.9s cubic-bezier(0.2, 0.75, 0.15, 1) both;
+  animation: word 0.9s var(--ease-brand) both;
 }
 @utility animate-draw {
   & path {
     stroke-dasharray: 1;
-    animation: draw 0.9s 0.9s cubic-bezier(0.6, 0, 0.2, 1) both;
+    animation: draw 0.9s 1.45s cubic-bezier(0.6, 0, 0.2, 1) both;
   }
 }
 @utility animate-breathe {
   animation: breathe 7s ease-in-out infinite;
 }
 @utility animate-rise {
-  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rise 0.9s var(--ease-brand) both;
+}
+@utility animate-veil {
+  animation: veil 1.2s var(--ease-brand) both;
+}
+@utility animate-drop {
+  animation: drop 0.8s var(--ease-brand) both;
+}
+@utility animate-focus-in {
+  animation: focus-in 1.3s var(--ease-brand) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -225,4 +295,6 @@
     transition-duration: 0.01ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .reveal-image { clip-path: none; }
+  .reveal-image img { scale: 1; }
 }

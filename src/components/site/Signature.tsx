@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import cappuccino from "@/assets/sig-cappuccino.webp";
 import matcha from "@/assets/sig-matcha.webp";
 import coldBrew from "@/assets/sig-coldbrew.webp";
@@ -34,16 +35,15 @@ export function Signature() {
 
         <div className="mt-16 grid gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
           {picks.map((p, i) => (
+            <div key={p.name} className="reveal" style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties}>
             <article
-              key={p.name}
-              style={{ transitionDelay: `${i * 120}ms` }}
               className={cn(
-                "reveal group relative rounded-[2rem] border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-transform duration-500 hover:rotate-0 hover:-translate-y-2",
+                "group relative rounded-[2rem] border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-[rotate,translate,box-shadow] duration-500 ease-brand hover:rotate-0 hover:-translate-y-2 hover:shadow-stamp-lg",
                 p.tilt,
               )}
             >
               <div className="relative overflow-hidden rounded-[1.5rem]">
-                <img src={p.img} alt={p.name} loading="lazy" className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={p.img} alt={p.name} loading="lazy" decoding="async" className="aspect-square w-full object-cover transition-transform duration-700 ease-brand group-hover:scale-105" />
                 <span className="absolute left-3 top-3 rounded-full bg-cream px-3 py-1 text-xs font-bold text-espresso">{p.tag}</span>
               </div>
               <div className="flex items-start justify-between gap-3 px-2 pb-2 pt-4">
@@ -57,6 +57,7 @@ export function Signature() {
                 </div>
               </div>
             </article>
+            </div>
           ))}
         </div>
       </div>
