@@ -23,6 +23,7 @@ export function Bean({ className, rotate = 0 }: { className?: string; rotate?: n
       alt=""
       aria-hidden
       loading="lazy"
+      decoding="async"
       style={{ ["--r" as string]: `${rotate}deg`, transform: `rotate(${rotate}deg)` }}
       className={cn("pointer-events-none absolute select-none drop-shadow-xl", className)}
     />

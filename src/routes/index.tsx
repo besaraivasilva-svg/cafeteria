@@ -22,7 +22,23 @@ export const Route = createFileRoute("/")({
         content: "Cafés especiais, matcha, cold brew e assados do dia. Veja o cardápio completo com preços.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CafeOrCoffeeShop",
+          name: "Bruma Café",
+          description: "Cafés especiais, matcha, cold brew e assados do dia.",
+          servesCuisine: ["Café", "Matcha", "Padaria"],
+          priceRange: "R$",
+          hasMenu: "/#cardapio",
+        }),
+      },
     ],
   }),
   component: Index,

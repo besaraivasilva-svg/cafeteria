@@ -7,3 +7,4 @@
 - [x] Aplicar arquitetura: catálogo com fotos, navegação contínua, jornada e rodapé
 - [x] Aplicar filosofia de UX: entrada em sequência, rolagem, hovers, microinterações, mobile, acessibilidade e desempenho
 - [x] Passe final de design premium: espaçamento, hierarquia, sombras, formas, imagens e detalhes
+- [x] Revisão de produção: segurança, desempenho, acessibilidade e SEO

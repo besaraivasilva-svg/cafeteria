@@ -66,7 +66,7 @@ export function Hero() {
       {/* header */}
       <header className="animate-drop relative z-20 mx-auto [animation-delay:120ms] grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-5 md:grid-cols-[1fr_auto_1fr]">
         <Logo />
-        <nav className="hidden items-center gap-2 md:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-2 md:flex">
           {nav.map((n) => (
             <Button key={n.href} variant="pill" size="sm" asChild className="px-5">
               <a href={n.href}>{n.label}</a>
@@ -166,7 +166,7 @@ export function Hero() {
             <div className="relative rotate-6 rounded-3xl border-[2.5px] border-espresso bg-cream p-3 shadow-stamp transition-[rotate,box-shadow] duration-500 ease-brand hover:rotate-0 hover:shadow-stamp-lg">
               <div className="relative grid size-36 place-items-center">
                 <Starburst className="animate-spin-slow absolute inset-0 text-honey" points={16} />
-                <img src={coldBrew} alt="Cold brew com casca de laranja" className="relative size-24 rounded-full object-cover" />
+                <img src={coldBrew} alt="Cold brew com casca de laranja" width={96} height={96} loading="lazy" decoding="async" className="relative size-24 rounded-full object-cover" />
               </div>
               <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 -rotate-6 whitespace-nowrap rounded-full border-2 border-espresso bg-honey px-4 py-1 text-center font-display text-sm leading-tight text-espresso shadow-stamp-sm">
                 Cold Brew

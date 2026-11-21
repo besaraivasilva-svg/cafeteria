@@ -13,11 +13,16 @@ const steps = [
 
 function InlinePic({ src, className }: { src: string; className?: string }) {
   return (
-    <span
-      className={`mx-1 inline-block h-[0.78em] w-[1.6em] translate-y-[0.06em] overflow-hidden rounded-full border-2 border-espresso align-baseline sm:mx-2 ${className ?? ""}`}
+    <>
+      <span className="sr-only"> </span>
+      <span
+        aria-hidden
+        className={`mx-1 inline-block h-[0.78em] w-[1.6em] translate-y-[0.06em] overflow-hidden rounded-full border-2 border-espresso align-baseline sm:mx-2 ${className ?? ""}`}
     >
-      <img src={src} alt="" aria-hidden loading="lazy" className="size-full object-cover" />
-    </span>
+        <img src={src} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
+      </span>
+      <span className="sr-only"> </span>
+    </>
   );
 }
 

@@ -9,7 +9,7 @@ export function Closing() {
       <div className="mx-auto max-w-6xl px-5">
         <h2 className="reveal relative font-serif text-[clamp(3.5rem,11vw,9rem)] italic leading-[0.9] tracking-tight text-espresso">
           Obrigado <span className="text-honey">pela</span> visita.
-          <span className="absolute -top-10 right-0 hidden rotate-6 items-center lg:-top-6 gap-2 rounded-full bg-cream py-1.5 pl-1.5 pr-4 font-sans text-base not-italic leading-normal tracking-normal text-espresso shadow-soft sm:inline-flex">
+          <span aria-hidden className="absolute -top-10 right-0 hidden rotate-6 items-center lg:-top-6 gap-2 rounded-full bg-cream py-1.5 pl-1.5 pr-4 font-sans text-base not-italic leading-normal tracking-normal text-espresso shadow-soft sm:inline-flex">
             <span className="grid size-8 place-items-center rounded-full bg-honey"><Heart className="size-4 fill-current" /></span>
             Volte sempre
           </span>
@@ -50,7 +50,7 @@ export function Closing() {
               <br />
               com amor
             </span>
-            <img src={icedLatte} alt="" aria-hidden loading="lazy" className="absolute bottom-0 left-1/2 w-[180px] -translate-x-1/2 drop-shadow-2xl sm:w-[210px]" />
+            <img src={icedLatte} alt="" aria-hidden loading="lazy" decoding="async" width={493} height={1100} className="absolute bottom-0 left-1/2 w-[180px] -translate-x-1/2 drop-shadow-2xl sm:w-[210px]" />
             <Bean className="animate-float left-2 top-24 w-14" rotate={-20} />
             <Bean className="animate-float-slow bottom-24 right-2 w-10" rotate={50} />
           </div>
